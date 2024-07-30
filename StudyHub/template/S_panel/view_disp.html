@@ -1,0 +1,16 @@
+
+    <center><h1 style="color: white;background-color: #037;margin: 12px 10px;padding: 10px 12px;width: 90%;border-radius: 10px;">{{cname}}</h1></center>
+        {% for y in data %}
+        <center>
+            <div style="width:90%;border-radius:10px;border: 1px solid #ccc; padding: 20px;margin-top: 20px;">
+                <h4>{{y.title}}</h4>
+                <p>{{y.discript}}</p>
+                <a href="{{y.link}}" class="btn btn-secondary disabled">Video Link</a>
+                <a href="/static/upload/{{y.doc}}" download class="btn btn-primary">Download</a>
+            </div>
+        </center>
+        {% endfor %}
+    </div>
+</div>
+</body>
+</html>

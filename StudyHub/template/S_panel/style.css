@@ -1,0 +1,25 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.profile-container {
+    position: relative;
+}
+
+.profile-label {
+    cursor: pointer;
+}
+
+.profile-image {
+    border-radius: 50%;
+    border: 2px solid #ccc;
+}
+
+input[type="file"] {
+    display: none;
+}

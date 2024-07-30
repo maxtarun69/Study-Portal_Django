@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <style>
+        .profile-img-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+        }
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        .file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(242, 244, 244);">
+    {% include 'S_panel/S_header.html' %}
+    
+    <div class="container-sm" style="background-color: white; border-radius: 10px; margin-top: 10%; padding: 30px;">
+        <div class="row">
+            <form method="post" enctype="multipart/form-data" action="save_profile">
+                {% csrf_token %}
+                {% for item in data %}
+                <div class="pro">
+                    <!-- User Image -->
+                    <div class="profile-img-container">
+                        <img id="preview-image" src="static/{{ item.image }}" alt="Profile Img" class="profile-img" style="margin-left: 40px;">
+                        <input type="file" id="profile-image" name="src" class="file-input" accept="image/*" onchange="previewImage(event)">
+                    </div>
+                    <label for="profile-image">Change profile Image:</label>
+                    <!-- User Name -->
+                    <br>
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="sname" class="form-control" value="{{ item.sname }}">
+                </div>
+                
+                <!-- Other profile fields -->
+                <!-- Gender -->
+                <div class="col-12 mt-2">
+                    <b>Gender:</b>&nbsp;&nbsp;  
+                    <input type="radio" id="male" name="gender" value="male" {% if item.gender == 'male' %} checked {% endif %}>
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female" {% if item.gender == 'female' %} checked {% endif %}>
+                    <label for="female">Female</label>
+                </div>
+                
+                <!-- Email -->
+                <div class="col-12 mt-2">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" class="form-control" value="{{ item.email }}">
+                </div>
+                
+                <!-- Phone Number -->
+                <div class="col-12 mt-2">
+                    <label for="contact">Phone no:</label>
+                    <input type="text" id="contact" name="contact" class="form-control" value="{{ item.contact }}">
+                </div>
+                
+                <!-- Address -->
+                <div class="col-12 mt-2">
+                    <label for="address">Address:</label>
+                    <textarea id="address" name="address" class="form-control">{{ item.address }}</textarea>
+                </div>
+                
+                <!-- Date and Time -->
+                <div class="col-12 mt-2">
+                    <p><strong>Date & Time:</strong> {{ item.dt }}</p>
+                </div>
+                
+                <!-- Save Changes Button -->
+                <div class="col-12 mt-2">
+                    <a href="{% url 'update_profile' Studentregister.id %}" class="btn-primary">Update Profile</a>
+
+                </div>
+                {% endfor %}
+            </form>
+        </div>
+    </div>
+    <br>
+    <br>
+    <script>
+        function previewImage(event) {
+            var input = event.target;
+            var reader = new FileReader();
+        
+            reader.onload = function() {
+                var preview = document.getElementById('preview-image');
+                preview.src = reader.result;
+            };
+        
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+    {% include 'S_panel/S_footer.html' %}
+</body>
+</html>

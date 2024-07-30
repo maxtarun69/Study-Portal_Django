@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+
+    <title>Study Hub</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="static/assets/css/fontawesome.css">
+    <link rel="stylesheet" href="static/assets/css/templatemo-grad-school.css">
+    <link rel="stylesheet" href="static/assets/css/owl.css">
+    <link rel="stylesheet" href="static/assets/css/lightbox.css">
+
+    <!-- Custom CSS -->
+    <style>
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 13%; 
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidebar a {
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #818181;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidebar a:hover {
+            color: #f1f1f1;
+            background-color: rgb(19, 19, 149);
+        }
+
+        .sidebar .closebtn {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            font-size: 36px;
+            margin-left: 50px;
+            color: white;
+            background-color: black;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .sidebar .closebtn:hover {
+            cursor: pointer;
+        }
+
+        @media screen and (max-height: 450px) {
+            .sidebar {padding-top: 15px;}
+            .sidebar a {font-size: 18px;}
+        }
+        .openbtn{
+            float: right;
+            margin-left: 10px;
+            background-color: transparent;
+            border: none;
+            color: #f1f1f1;
+            font-size: 40px;
+        }
+        .openbtn:hover{
+            background-color: #F5A425;
+            color: #111;
+        }
+    </style>
+</head>
+
+<body>
+        <!-- Page content -->
+    <header class="main-header clearfix" role="header">
+      <div class="logo">
+          <a class="navbar-brand" href="#"  style="color:#f5a425;"><img src="static/assets/images/logo.png" hight="60px" width="60px">&nbsp;<spam style="color: rgb(23, 23, 226);">Study</spam> Hub</a>
+      </div>
+      <a href="#menu" class="menu-link"><i class="fa fa-bars"></i></a>
+      <nav id="menu" class="main-nav" role="navigation">
+        <ul class="main-menu">
+            <li class="has-submenu"><a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa fa-user"></i>
+                Welcome ! {{request.session.un1}}
+            </a>
+                <button class="openbtn" onclick="openNav()">&#9776;</button>
+        </li>
+        </ul>
+        </nav>
+    </header>
+    <!-- Sidebar -->
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="chkadmin"><i class="fa fa-home"></i> Home</a>
+        <a href="/addcouse"><i class="fa fa-plus"></i> Add Course</a>
+        <a href="viewcontant"><i class="fa fa-eye"></i> View Courses</a>
+        <a href="/rpass"><i class="fa fa-key"></i> Reset Password</a>
+        <a href="/mylogout"><i class="fa fa-sign-out"></i> Logout</a>
+    </div>
+
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidebar").style.width = "250px";
+            document.addEventListener("click", closeNavOutside);
+        }
+
+        function closeNav() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.removeEventListener("click", closeNavOutside);
+        }
+
+        function closeNavOutside(event) {
+            if (!event.target.matches('.openbtn') && !event.target.matches('.sidebar') && !event.target.matches('.sidebar *')) {
+                closeNav();
+            }
+        }
+    </script>
+</body>
+</html>

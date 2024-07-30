@@ -1,0 +1,45 @@
+{% include 'cpanel/adminheader.html' %}
+
+<div class="container" style="background-color: #172238; margin-top:10%; border-radius: 10px;">
+    <div class="row justify-content-center">
+        <div class="col-md-6 form-container">
+            <h3 class="text-center mb-4">Add Content</h3>
+            <form method="post" action="/contants" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="sc">Select Course</label>
+                    <select name="sc" class="form-control">
+                        <option value="" disabled selected>Select Course</option>
+                        {% for x in data %}
+                            <option>{{ x.cname }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ttl">Title</label>
+                    <input type="text" class="form-control" name="ttl" placeholder="Title">
+                </div>
+                <div class="form-group">
+                    <label for="discript">Description</label>
+                    <textarea name="discript" class="form-control" placeholder="Add Description"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="link">Link</label>
+                    <input type="text" class="form-control" name="link" placeholder="https://">
+                </div>
+                <div class="form-group">
+                    <label for="doc">Upload Document</label>
+                    <input type="file" class="form-control" name="doc">
+                </div>
+                <div class="form-group text-center">
+                    <input type="submit" value="Add Course" class="btn btn-primary btn-block">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+
+
+{% include 'cpanel/adminfooter.html' %}

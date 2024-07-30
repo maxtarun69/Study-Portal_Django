@@ -1,0 +1,28 @@
+
+{% include 'cpanel/adminheader.html' %}
+
+<div class="container" style="background-color:  #172238; margin-top: 10%; border-radius: 10px;">
+    
+        <center><br><i class="fa fa-key" style="font-size: 30px; color: #fff;" ></i><br>
+        <br><h3 style="color: #fff;">Reset Password</h3><br>
+<div class="col-3"></div>
+<div class="col-6 mt-3">
+    <form method="post" action="/resetupdate">
+        {% csrf_token %}
+<div class="col-12 mb-3">
+
+    <input class="form-control" type="password" name="nps" placeholder="New-password">
+</div>
+<div class="col-12 mb-3">
+    <input class="form-control" typer="pasword" name="cps" placeholder="Confirm-password">
+</div>
+<div class="col-12 mb-3">
+   <center> <input type="submit" value="Reset" class="btn btn-primary"> </center>
+   <br>
+</div>
+</form>
+</div>
+</div>
+</center>
+</div>
+{% include 'cpanel/adminfooter.html' %}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+ 
+</head>
+<body style="background-color: rgb(242, 244, 244);">
+    {% include 'S_panel/S_header.html' %}
+    <div class="container-sm" style="background-color: white; border-radius: 10px;margin-top: 10%; padding:30px; margin-bottom: 10%; ">
+        <div class="row">
+            <div class="pro">
+                {% for s in data %}
+                <!-- User Image -->
+                <img src="static/{{s.image}}" class="profile-image" width="100" height="100" style="border-radius: 50%; margin-left: 40px;">
+                <h2>{{s.sname}}</h2> 
+            </div>
+            <div style="float: right; margin-left: 70%;">
+                <p><strong>Date & Time</strong><br> {{s.dt}}</p>
+            </div>
+            <hr>
+            <div class="col-12 mt-2">
+                <!-- User Gender -->
+                <p><strong>Gender:</strong>  {{s.gender}}</p>
+            </div>
+            <div class="col-12">
+                <!-- User Email -->
+                <p><strong>Email:</strong>   {{s.email}}</p>
+            </div>
+            <div class="col-12">
+                <!-- User Phone Number -->
+                <p><strong>Phone No:</strong>  {{s.contact}}</p>
+            </div>
+            <div class="col-12">
+                <!-- User Address -->
+                <p><strong>Address:</strong>   {{s.address}}</p>
+            </div>
+            <div class="col-12">
+                <!-- User Address -->
+                <p><strong>Term & Condition</strong>   {{s.term}}</p>
+            </div>
+            <div class="col-12">
+                <a href="/Update_Profile" class="btn btn-primary">Update Profile</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% include 'S_panel/S_footer.html' %}
+</body>
+</html>

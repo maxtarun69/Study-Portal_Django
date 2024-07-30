@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    
+    <style>
+        .container3{
+            position: relative;
+            width: 80%;
+            padding: 20px;
+            background-color: #172238;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: flex-end;
+            margin-left: 8%;
+        }
+        .icon2{
+    display: flex;
+    align-items: center;
+    margin-top: 8%;
+
+}
+
+.icon2 i {
+    font-size: 3em;
+    margin-right: 10px;
+}
+
+        .admin-image {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+.details i {
+    font-size: 3em;
+    margin-right: 10px;
+    
+
+}
+
+.details  span {
+    margin-right: 10px;
+    font-weight: bold;
+    font-size: 55px;
+}
+.details ul{
+    list-style: none;
+
+}
+.details ul li{
+    padding : 10px 12px;
+    float: right;
+    margin-left: 160px;
+    border-left: #fff 2px solid;
+
+
+}
+
+    </style>
+</head>
+<body>
+    {% include 'cpanel/adminheader.html' %}
+<!-- Main Content -->
+<div class="icon2"><i class="fa fa-tachometer"></i> :You Are In Dashboard</div> <!-- Font Awesome dashboard icon -->
+<div class="container3">
+    <img class="admin-image" src="static/upload/avtar.jpg" alt="Admin Image"> <!-- Admin image -->
+   
+<div class="details">
+    <ul> 
+      <li>
+      <a href="/S_view"><i class="fa fa-users"></i><br><p>Students:  </p></a></li>
+      <li> <!-- Total registered students -->
+        <a  href="/S_view"><i class="fa fa-star"></i><br><p> Subscriptions</p>
+      </li> <!-- Visited students -->
+     <li><a href="inbox"><i class="fa fa-envelope"></i><br><p> Inbox:</p></a>
+      </li>
+   </ul> <!-- Email students -->
+  </div>
+  </div>
+    {% include 'cpanel/adminfooter.html' %}
+
+
+</body>
+</html>

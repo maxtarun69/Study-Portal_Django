@@ -1,0 +1,44 @@
+{% include 'cpanel/adminheader.html' %}
+
+<div class="container" style="background-color: #f9f9f9; margin-top: 20px; border-radius: 10px;">
+    <div class="row">
+        <div class="col">
+            <br><br><br><br>
+            <h3 class="text-center">View Content</h3>
+            <br><br>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Link</th>
+                        <th>Document</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ course.id }}</td>
+                        <td>{{ course.title }}</td>
+                        <td>{{ course.content }}</td>
+                        <td><a href="{{ course.video_link }}">Video Link</a></td>
+                        <td>
+                            <a href="{{ course.pdf.url }}" download>
+                                <i class="fa fa-download" style="font-size: 15px;">Download</i>
+                            </a>
+                        </td>
+                        <td align="center">
+                            <a href="/delbyid/{{ course.id }}"><i class="fa fa-trash" style="font-size: 20px;"></i></a>
+                            <a href="/editbyid/{{ course.id }}"><i class="fa fa-edit" style="font-size: 20px;"></i></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% include 'cpanel/adminfooter.html' %}

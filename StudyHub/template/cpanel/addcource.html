@@ -1,0 +1,50 @@
+{% include 'cpanel/adminheader.html' %}
+
+<center>
+    <div class="container" style="background-color: #172238; margin-top:10%; border-radius: 10px; margin-bottom: 10%;">
+    
+        <center> <br><br><h3 style="color: #fff;">Add your course</h3></center><br>
+        <div id="errorMessages">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}" style="width: 25%; color: #fff; background-color: darkgreen;" >
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="col-6 mt-3">
+            <form method="post" enctype="multipart/form-data" action="save">
+
+                {% csrf_token %}
+                <div class="col-12 mb-3">
+                    
+                    <input type="text" class="form-control" name="title" id="id_title"  placeholder="Enter course title">
+                </div>
+                <div class="col-12 mb-3">
+                    
+                    <textarea name="content" style="height: 200px;" class="form-control" id="id_content" placeholder=" Add contant" required></textarea>
+                </div>
+                <div class="col-12 mb-3">
+                    
+                    <input type="file" class="form-control" name="image" id="id_image" Add image>
+                </div>
+                <div class="col-12 mb-3">
+                    
+                    <input type="url" class="form-control" name="video_link" id="id_video_link" placeholder="Add video link">
+                </div>
+                <div class="col-12 mb-3">
+                    
+                    <input type="file"class="form-control" name="pdf" id="id_pdf" placeholder="Add pdf">
+                </div>
+
+                <div class="col-12 mb-3">
+                    <center> <input type="submit" value="Add Course" class="btn btn-primary"> </center>
+                </div>
+                <br>
+            </form>
+
+        </div>
+    </div>
+</div>
+</center>
+
+{% include 'cpanel/adminfooter.html' %}

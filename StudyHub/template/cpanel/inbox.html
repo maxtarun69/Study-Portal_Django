@@ -1,0 +1,192 @@
+{% include 'cpanel/adminheader.html' %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Inbox</title>
+    <style>
+        .admin-inbox {
+            width: 80%;
+            margin: 0 auto;
+            background: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-top: 10%;
+        }
+
+        .inbox-header {
+            background: #172238;
+            color: #fff;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .inbox-container {
+            display: flex;
+        }
+
+        .message-list {
+            width: 30%;
+            border-right: 1px solid #ddd;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .message-item {
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .message-item:hover {
+            background: #f1f1f1;
+        }
+
+        .message-content {
+            width: 70%;
+            padding: 20px;
+        }
+
+        .message-content h2 {
+            margin-top: 0;
+        }
+
+        .message-content .message-sender {
+            color: #777;
+            font-size: 14px;
+        }
+
+        .message-content .message-body {
+            margin-top: 20px;
+        }
+
+        .message-actions {
+            margin-top: 20px;
+        }
+
+        .message-actions button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            cursor: pointer;
+            background: #172238;
+            color: #fff;
+            border: none;
+        }
+
+        .message-actions button.delete {
+            background: #ff4d4d;
+        }
+
+        .checkbox {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-inbox">
+        <header class="inbox-header">
+            <h1>Inbox</h1>
+        </header>
+        <div class="inbox-container">
+            <div class="message-list">
+                <!-- Loop through messages -->
+                {% for m in message %}
+                <div class="message-item" data-id="{{m.id}}" onclick="openMessage(this, {{m.id}})">
+                    <input type="checkbox" class="checkbox" onclick="event.stopPropagation(); toggleSelectMessage(this, {{m.id}})">
+                    
+                    <div class="sender">{{m.email}}</div>
+                    <div class="subject">{{m.message}}</div>
+                    <div class="timestamp">{{m.created_at}}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="message-content">
+                <h2>Select a message to view its content</h2>
+                <p class="message-sender">From: </p>
+                <p class="message-body">Message content will appear here.</p>
+                <div class="message-actions">
+                    <button onclick="toggleSelectAllMessages()">Select All Messages</button>
+                    <button class="delete" onclick="deleteSelectedMessages()">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMessageId = null;
+        const selectedMessages = new Set();
+        let allSelected = false;
+
+        function openMessage(element, messageId) {
+            const sender = element.querySelector('.sender').innerText;
+            const subject = element.querySelector('.subject').innerText;
+            const body = "This is a sample message body for the selected message.";
+
+            document.querySelector('.message-content h2').innerText = subject;
+            document.querySelector('.message-content .message-sender').innerText = "From: " + sender;
+            document.querySelector('.message-content .message-body').innerText = body;
+
+            selectedMessageId = messageId;
+        }
+
+        function toggleSelectMessage(checkbox, messageId) {
+            if (checkbox.checked) {
+                selectedMessages.add(messageId);
+            } else {
+                selectedMessages.delete(messageId);
+            }
+        }
+
+        function toggleSelectAllMessages() {
+            const checkboxes = document.querySelectorAll('.message-item .checkbox');
+            allSelected = !allSelected;
+
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = allSelected;
+                const messageId = parseInt(checkbox.closest('.message-item').getAttribute('data-id'), 10);
+                if (allSelected) {
+                    selectedMessages.add(messageId);
+                } else {
+                    selectedMessages.delete(messageId);
+                }
+            });
+        }
+
+        function deleteSelectedMessages() {
+            if (selectedMessages.size > 0) {
+                const idsToDelete = Array.from(selectedMessages);
+                idsToDelete.forEach(messageId => {
+                    const deleteUrl = `/delmessage/${messageId}`;
+                    // Implement the actual delete logic here, such as making an AJAX request to delete the messages from the server
+                    console.log("Deleting message with ID " + messageId + " via " + deleteUrl);
+                    
+                    // You can uncomment the lines below to make an actual DELETE request if needed
+                    // fetch(deleteUrl, { method: 'DELETE' }).then(response => {
+                    //     if (response.ok) {
+                    //         document.querySelector(`.message-item[data-id="${messageId}"]`).remove();
+                    //     } else {
+                    //         console.error('Failed to delete message with ID ' + messageId);
+                    //     }
+                    // });
+
+                    // Optionally, remove the messages from the list in the UI immediately
+                    document.querySelector(`.message-item[data-id="${messageId}"]`).remove();
+                });
+
+                selectedMessages.clear();
+
+                // Clear the message content display
+                document.querySelector('.message-content h2').innerText = "Select a message to view its content";
+                document.querySelector('.message-content .message-sender').innerText = "From: ";
+                document.querySelector('.message-content .message-body').innerText = "Message content will appear here.";
+            } else {
+                alert("Please select messages to delete.");
+            }
+        }
+    </script>
+</body>
+</html>
+
+{% include 'cpanel/adminfooter.html' %}

@@ -1,0 +1,77 @@
+<style>
+    .bk{
+        background-image: url('static/upload/back.jpg');
+  
+    }
+</style>
+<body class="bk">
+{% include 'header.html' %}
+<center>
+    <div class="container" style="background-color: #172238; margin-top:10%; border-radius: 10px;">
+       <center><br><i class="fa fa-user" style="font-size: 55px; color:white;"></i>
+        <br><h4 style="color: #fff;">Student Login</h4></center>
+       <div class="col-3"></div>
+
+       <div class="col-6 mt-3">
+
+            <form method="post" action="/S_dash" id="signin-form" onsubmit="return validateForm()" >
+                {% csrf_token %}
+                <div class="col-12 mb-3">
+                    <input class="form-control" type="text" name="uname" placeholder="Student Id">
+                </div>
+                <div class="col-12 mb-3">
+                    <input class="form-control" type="password" name="passw" placeholder="Password">
+                </div>
+                <div class="col-12 mb-3">
+                    <center> 
+                        <input type="submit" value="Sign In" class="btn btn-primary">
+                    </center>
+                    <br>
+
+                </div>
+            </form>
+       </div>
+    </div>
+</div>
+</center>
+
+{% include 'footer.html'%}
+
+<script>
+    function validateForm() {
+        var username = document.getElementById("uname").value;
+        var password = document.getElementById("passw").value;
+
+        if (username == "" || password == "") {
+            alert("Username and password must be filled out");
+            return false;
+        }
+
+        
+
+        return true;
+    }
+
+    function validateForm() {
+        var username = document.getElementById("uname").value;
+        var password = document.getElementById("passw").value;
+
+        if (username == "" || password == "") {
+            alert("Username and password must be filled out");
+            return false;
+        }
+
+        
+
+        return true;
+    }
+</script>
+
+<style>
+    
+    .form-icon {
+        margin-top: 10px;
+        display: block;
+    }
+</style>
+</body>

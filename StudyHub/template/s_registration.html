@@ -1,0 +1,85 @@
+<style>
+    .col-md-12{
+        margin-bottom: 10px;
+    }
+    b{
+        color: #fff;
+        margin-right: 40px;
+    }
+</style>
+<html>
+    <body>
+        {% include 'header.html' %}
+       <center>
+        <div class="container" style="background-color: #172238; margin-top: 10%; border-radius: 10px;margin-bottom: 10%;">
+                <center>
+                    <br><br><i class="fa fa-user" style="font-size: 55px; color:white;"></i><br><br><h4 style="color: #fff;">Registration Form</h4>
+                </center><br>
+                
+                <div class="col-6 mt-3">
+                    <script>
+                        window.onload = function() {
+                            var errorMessage = "{{ error|escapejs }}";
+                            if (errorMessage) {
+                                alert(errorMessage);
+                            }
+                        };
+                    </script>
+                    <form id="contact" method="post" action="/regist" enctype="multipart/form-data" onsubmit="return validateForm()">
+                        <div class="row">
+                        {% csrf_token %}
+                        <div class="col-md-12">
+                            
+                            <input id="sname" class="form-control" type="text" name="sname" placeholder="Student Name">
+                        </div>
+                        <div class="mt-3" style=" padding: 20px; margin-bottom: 10px;">
+                           <b> Gender:</b> &nbsp;&nbsp;  
+                            <input type="radio" name="gender" value="male" class="form-check-input">  <b>Male</b>&emsp;&emsp;
+                            <input type="radio" name="gender" value="Female" class="form-check-input"> <b>Female </b>
+                        </div>
+                        <div class="col-md-12">
+                            <input id="contact" type="number" class="form-control" name="contact" placeholder="Contact Number">
+                        </div>
+                        <div class="col-md-12">
+                            <input id="email" type="email" class="form-control" name="email" placeholder="Email ID">
+                        </div>
+                        <div class="col-md-12">
+                            <textarea id="address" name="address" class="form-control" placeholder="Address"></textarea>
+                        </div>
+                        <div class="col-md-12">
+                            <input id="src" type="file" name="src" class="form-control">
+                        </div>
+                        <div class="col-md-12">
+                            <input type="checkbox" id="terms" name="terms" class="form-check-input"> 
+                            <label for="terms" style="color: #fff;">Terms & Conditions</label>
+                        </div>
+                        <div class="col-md-12">
+                            <center><input type="submit" value="Submit" class="btn btn-primary"></center>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    </form>
+                </div>
+                </div>
+                </center>
+        </body>
+        {% include 'footer.html' %}
+
+<script>
+    function validateForm() {
+        var sname = document.getElementById("sname").value;
+        var contact = document.getElementById("contact").value;
+        var email = document.getElementById("email").value;
+        var address = document.getElementById("address").value;
+        var src = document.getElementById("src").value;
+        var terms = document.getElementById("terms").checked;
+
+        if (sname == "" || contact == "" || email == "" || address == "" || src == "" || !terms) {
+            alert("Please fill out all fields and accept the terms and conditions.");
+            return false;
+        }
+
+        return true;
+    }
+</script>

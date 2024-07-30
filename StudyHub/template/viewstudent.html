@@ -1,0 +1,35 @@
+
+{% include 'header.html' %}
+<div class="container" style="background-color: #f9f9f9; margin-top: 20px; border-radius: 10px; margin-top: 10%;margin-bottom: 10%;">
+    <div class="row">
+       <center> <br><br><h3>Registred Students</h3><br><br></center>
+    
+<table class="table table-bordered">
+    <tr>
+         <th>Id</th>
+         <th>Image</th>
+         <th>Student name</th>
+         <th>Gender</th>
+         <th>Email</th>
+         <th>Phon no</th>
+         <th>Address</th>
+         <th>Term & Condition</th>
+         <th>Date and time</th>
+    </tr>
+    {% for S in data %}
+    <tr>
+        <td>{{S.id}}</td>
+        <td><img src="static/{{S.image}}" width="80" height="80"></td>
+        <td>{{S.sname}}</td>
+        <td>{{S.gender}}</td>
+        <td>{{S.email}}</td>
+        <td>{{S.contact}}</td>
+        <td>{{S.address}}</td>
+        <td>{{S.term}}</td>
+        <td>{{S.dt}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+</div>
+{% include 'footer.html'%}
